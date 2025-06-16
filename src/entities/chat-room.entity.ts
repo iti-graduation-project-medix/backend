@@ -1,0 +1,23 @@
+
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  CreateDateColumn,
+} from 'typeorm';
+import { User } from './user.entity';
+
+@Entity()
+export class ChatRoom {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @ManyToOne(() => User)
+  sender: User;
+
+  @ManyToOne(() => User)
+  reciver: User;
+
+  @CreateDateColumn()
+  createdAt: Date;
+}
