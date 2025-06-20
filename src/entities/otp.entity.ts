@@ -1,14 +1,12 @@
-
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { User } from './user.entity';
 
 @Entity()
 export class OTP {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
-  @ManyToOne(() => User, (user) => user.otps)
-  user: User;
+  @ManyToOne('User', 'otps')
+  user: any;
 
   @Column()
   code: string;
