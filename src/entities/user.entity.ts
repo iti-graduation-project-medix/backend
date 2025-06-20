@@ -1,4 +1,3 @@
-
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -30,8 +29,8 @@ export class User {
   @Column()
   password: string;
 
-  @Column({ type: 'enum', enum: ['user', 'pharmacist'] })
-  role: 'user' | 'pharmacist';
+  @Column({ type: 'enum', enum: ['admin', 'user', 'pharmacist'] })
+  role: 'admin' | 'user' | 'pharmacist';
 
   @Column({ nullable: true })
   profilePhotoUrl: string;
