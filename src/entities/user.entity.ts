@@ -7,15 +7,34 @@ import {
   OneToMany,
   OneToOne,
 } from 'typeorm';
+
 import { Medicine } from './medicine.entity';
 import { Message } from './message.entity';
 import { OTP } from './otp.entity';
 import { Subscription } from './subscription.entity';
 
+
+enum VerificationStatus {
+  PENDING = "pending",
+  CONFIRMED = "confirmed",
+  BLOCKED = "blocked"
+}
+
+enum status {
+  USER = "user",
+  ADMIN = "admin",
+  PHARMACIST = "pharmacist"
+}
+
+enum subscriptionStatus {
+  MONTHLY = "monthly",
+  YEARLY = "yearly",
+}
+
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
   @Column()
   fullName: string;
@@ -29,14 +48,17 @@ export class User {
   @Column()
   password: string;
 
-  @Column({ type: 'enum', enum: ['admin', 'user', 'pharmacist'] })
-  role: 'admin' | 'user' | 'pharmacist';
+  @Column({ type: 'enum', enum: status, default: status.USER })
+  role: status;
 
   @Column({ nullable: true })
   profilePhotoUrl: string;
 
   @Column()
-  idCardUrl: string;
+  idFrontCardUrl: object;
+
+  @Column()
+  idBackCardUrl: object;
 
   @Column({ default: false })
   isIdVerified: boolean;
@@ -44,14 +66,14 @@ export class User {
   @Column()
   workIdUrl: string;
 
-  @Column({ default: false })
-  isWorkIdVerified: boolean;
+  @Column({ type: "enum", enum: VerificationStatus, default: VerificationStatus.PENDING })
+  isWorkIdVerified: VerificationStatus;
 
   @Column({ type: 'boolean', default: false })
   subscriptionStatus: boolean;
 
-  @Column({ type: 'enum', enum: ['monthly', 'yearly'], nullable: true })
-  subscriptionType: 'monthly' | 'yearly';
+  @Column({ type: 'enum', enum: subscriptionStatus, nullable: true })
+  subscriptionType: subscriptionStatus;
 
   @Column({ nullable: true })
   otpCode: string;

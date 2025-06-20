@@ -9,8 +9,8 @@ import { User } from './user.entity';
 
 @Entity()
 export class ChatRoom {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
   @ManyToOne(() => User)
   sender: User;
