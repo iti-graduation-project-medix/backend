@@ -6,24 +6,23 @@ import {
   UpdateDateColumn,
   OneToMany,
   OneToOne,
-} from 'typeorm';
+} from "typeorm";
 
-import { Medicine } from './medicine.entity';
-import { Message } from './message.entity';
-import { OTP } from './otp.entity';
-import { Subscription } from './subscription.entity';
-
+import { Medicine } from "./medicine.entity";
+import { Message } from "./message.entity";
+import { OTP } from "./otp.entity";
+import { Subscription } from "./subscription.entity";
 
 enum VerificationStatus {
   PENDING = "pending",
   CONFIRMED = "confirmed",
-  BLOCKED = "blocked"
+  BLOCKED = "blocked",
 }
 
 enum status {
   USER = "user",
   ADMIN = "admin",
-  PHARMACIST = "pharmacist"
+  PHARMACIST = "pharmacist",
 }
 
 enum subscriptionStatus {
@@ -48,17 +47,17 @@ export class User {
   @Column()
   password: string;
 
-  @Column({ type: 'enum', enum: status, default: status.USER })
+  @Column({ type: "enum", enum: status, default: status.USER })
   role: status;
 
   @Column({ nullable: true })
   profilePhotoUrl: string;
 
-  @Column()
-  idFrontCardUrl: object;
+  @Column("jsonb")
+  idFrontCardUrl: Record<string, any>;
 
-  @Column()
-  idBackCardUrl: object;
+  @Column("jsonb")
+  idBackCardUrl: Record<string, any>;
 
   @Column({ default: false })
   isIdVerified: boolean;
@@ -66,31 +65,35 @@ export class User {
   @Column()
   workIdUrl: string;
 
-  @Column({ type: "enum", enum: VerificationStatus, default: VerificationStatus.PENDING })
+  @Column({
+    type: "enum",
+    enum: VerificationStatus,
+    default: VerificationStatus.PENDING,
+  })
   isWorkIdVerified: VerificationStatus;
 
-  @Column({ type: 'boolean', default: false })
+  @Column({ type: "boolean", default: false })
   subscriptionStatus: boolean;
 
-  @Column({ type: 'enum', enum: subscriptionStatus, nullable: true })
+  @Column({ type: "enum", enum: subscriptionStatus, nullable: true })
   subscriptionType: subscriptionStatus;
 
   @Column({ nullable: true })
   otpCode: string;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({ type: "timestamp", nullable: true })
   otpExpiresAt: Date;
 
-  @OneToMany('Medicine', 'postedBy')
+  @OneToMany("Medicine", "postedBy")
   medicines: any;
 
-  @OneToMany('Message', 'sender')
+  @OneToMany("Message", "sender")
   messages: any;
 
-  @OneToMany('OTP', 'user')
+  @OneToMany("OTP", "user")
   otps: any;
 
-  @OneToOne('Subscription', 'user')
+  @OneToOne("Subscription", "user")
   subscription: any;
 
   @CreateDateColumn()

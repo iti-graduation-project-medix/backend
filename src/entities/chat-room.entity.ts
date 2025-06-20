@@ -3,17 +3,17 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   CreateDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
 @Entity()
 export class ChatRoom {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @ManyToOne('User')
+  @ManyToOne("User")
   sender: any;
 
-  @ManyToOne('User')
+  @ManyToOne("User")
   reciver: any;
 
   @CreateDateColumn()

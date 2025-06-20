@@ -9,7 +9,9 @@ describe('AdvertisementRequestService', () => {
       providers: [AdvertisementRequestService],
     }).compile();
 
-    service = module.get<AdvertisementRequestService>(AdvertisementRequestService);
+    service = module.get<AdvertisementRequestService>(
+      AdvertisementRequestService,
+    );
   });
 
   it('should be defined', () => {

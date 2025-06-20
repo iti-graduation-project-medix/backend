@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-import { JwtService } from './common/services/jwt.service';
+import { CustomJwtService } from './common/services/custom-jwt.service';
 import { JwtInterceptor } from './common/interceptors/jwt.interceptor';
 
 async function bootstrap() {
@@ -14,7 +14,7 @@ async function bootstrap() {
     }),
   );
 
-  const jwtService = app.get(JwtService);
+  const jwtService = app.get(CustomJwtService);
 
   app.useGlobalInterceptors({
     intercept(context, next) {

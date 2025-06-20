@@ -9,7 +9,9 @@ describe('AdvertisementRequestController', () => {
       controllers: [AdvertisementRequestController],
     }).compile();
 
-    controller = module.get<AdvertisementRequestController>(AdvertisementRequestController);
+    controller = module.get<AdvertisementRequestController>(
+      AdvertisementRequestController,
+    );
   });
 
   it('should be defined', () => {
