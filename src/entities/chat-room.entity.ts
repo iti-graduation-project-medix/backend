@@ -8,7 +8,7 @@ import {
 @Entity()
 export class ChatRoom {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @ManyToOne('User')
   sender: any;

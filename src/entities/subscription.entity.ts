@@ -9,7 +9,7 @@ import {
 @Entity()
 export class Subscription {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @OneToOne('User', 'subscription')
   @JoinColumn()

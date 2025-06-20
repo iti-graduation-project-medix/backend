@@ -10,7 +10,7 @@ import {
 @Entity()
 export class Advertisement {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @Column()
   title: string;

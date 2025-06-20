@@ -3,7 +3,7 @@ import { JwtService as NestJwtService, JwtSignOptions } from '@nestjs/jwt';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class JwtService {
+export class CustomJwtService {
   constructor(private readonly jwt: NestJwtService) {}
 
   generateToken(payload: Partial<User>, options?: JwtSignOptions): string {

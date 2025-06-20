@@ -9,7 +9,7 @@ import {
 @Entity()
 export class Message {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @ManyToOne('ChatRoom', 'messages')
   chatRoom: any;

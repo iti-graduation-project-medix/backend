@@ -5,10 +5,10 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { JwtService } from '../services/jwt.service';
+import { CustomJwtService } from '../services/custom-jwt.service';
 
 export class JwtInterceptor implements NestInterceptor {
-  constructor(private jwtService: JwtService) {}
+  constructor(private jwtService: CustomJwtService) {}
 
   intercept(
     context: ExecutionContext,
