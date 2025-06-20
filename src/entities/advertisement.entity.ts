@@ -6,12 +6,11 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { AdvertisementRequest } from './advertisement-request.entity';
 
 @Entity()
 export class Advertisement {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   title: string;
@@ -43,11 +42,7 @@ export class Advertisement {
   @Column()
   targetPosition: string;
 
-  // @OneToOne(
-  //   () => AdvertisementRequest,
-  //   (advertisementRequest) => advertisementRequest.advertisement,
-  //   { cascade: true },
-  // )
-  // @JoinColumn() // This is the owning side
-  // advertisementRequest: AdvertisementRequest;
+  @OneToOne('AdvertisementRequest', 'advertisement', { cascade: true })
+  @JoinColumn()
+  advertisementRequest: any;
 }
