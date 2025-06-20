@@ -3,6 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { AdvertisementModule } from './advertisement/advertisement.module';
+import { AdvertisementRequestModule } from './advertisement-request/advertisement-request.module';
+import { JwtModule } from '@nestjs/jwt';
+import { JwtService } from './common/services/jwt.service';
 
 @Module({
   imports: [
@@ -18,8 +22,15 @@ import { ConfigModule } from '@nestjs/config';
       synchronize: true,
       logging: true,
     }),
+    JwtModule.register({
+      secret: process.env.JWT_SECRET || 'secret',
+      signOptions: { expiresIn: '15d' },
+    }),
+    AdvertisementModule,
+    AdvertisementRequestModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, JwtService],
+  exports: [JwtService],
 })
 export class AppModule {}
