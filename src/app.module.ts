@@ -19,6 +19,8 @@ import { JwtService } from './common/services/jwt.service';
       password: String(process.env.DB_PASSWORD),
       database: process.env.DB_NAME,
       autoLoadEntities: true,
+      entities: [__dirname + '/entities/*.entity{.ts,.js}'],
+
       synchronize: true,
       logging: true,
     }),

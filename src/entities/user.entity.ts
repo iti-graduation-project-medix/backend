@@ -7,14 +7,10 @@ import {
   OneToMany,
   OneToOne,
 } from 'typeorm';
-import { Medicine } from './medicine.entity';
-import { Message } from './message.entity';
-import { OTP } from './otp.entity';
-import { Subscription } from './subscription.entity';
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Column()
@@ -59,17 +55,17 @@ export class User {
   @Column({ type: 'timestamp', nullable: true })
   otpExpiresAt: Date;
 
-  @OneToMany(() => Medicine, (medicine) => medicine.postedBy)
-  medicines: Medicine[];
+  @OneToMany('Medicine', 'postedBy')
+  medicines: any;
 
-  @OneToMany(() => Message, (message) => message.sender)
-  messages: Message[];
+  @OneToMany('Message', 'sender')
+  messages: any;
 
-  @OneToMany(() => OTP, (otp) => otp.user)
-  otps: OTP[];
+  @OneToMany('OTP', 'user')
+  otps: any;
 
-  @OneToOne(() => Subscription, (subscription) => subscription.user)
-  subscription: Subscription;
+  @OneToOne('Subscription', 'user')
+  subscription: any;
 
   @CreateDateColumn()
   createdAt: Date;

@@ -1,4 +1,3 @@
-
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -6,21 +5,20 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { User } from './user.entity';
 
 @Entity()
 export class Subscription {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
-  @OneToOne(() => User, (user) => user.subscription)
+  @OneToOne('User', 'subscription')
   @JoinColumn()
-  user: User;
+  user: any;
 
   @Column({ type: 'enum', enum: ['monthly', 'yearly'] })
   plan: 'monthly' | 'yearly';
 
-  @Column({ type: 'boolean',  default: false })
+  @Column({ type: 'boolean', default: false })
   status: boolean;
 
   @Column()

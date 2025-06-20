@@ -1,4 +1,3 @@
-
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -6,11 +5,10 @@ import {
   ManyToOne,
   CreateDateColumn,
 } from 'typeorm';
-import { User } from './user.entity';
 
 @Entity()
 export class Medicine {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Column()
@@ -28,11 +26,11 @@ export class Medicine {
   @Column()
   isSoldOut: boolean;
 
-  @Column()
+  @Column('text', { array: true })
   imagesUrl: string[];
 
-  @ManyToOne(() => User, (user) => user.medicines)
-  postedBy: User;
+  @ManyToOne('User', 'medicines')
+  postedBy: any;
 
   @CreateDateColumn()
   createdAt: Date;
