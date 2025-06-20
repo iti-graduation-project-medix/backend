@@ -53,11 +53,11 @@ export class User {
   @Column({ nullable: true })
   profilePhotoUrl: string;
 
-  @Column()
-  idFrontCardUrl: object;
+  @Column("jsonb")
+  idFrontCardUrl: Record<string, any>;
 
-  @Column()
-  idBackCardUrl: object;
+  @Column("jsonb")
+  idBackCardUrl: Record<string, any>;
 
   @Column({ default: false })
   isIdVerified: boolean;
