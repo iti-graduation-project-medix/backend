@@ -13,19 +13,19 @@ import { Message } from "./message.entity";
 import { OTP } from "./otp.entity";
 import { Subscription } from "./subscription.entity";
 
-enum VerificationStatus {
+export enum VerificationStatus {
   PENDING = "pending",
   CONFIRMED = "confirmed",
   BLOCKED = "blocked",
 }
 
-enum status {
+export enum status {
   USER = "user",
   ADMIN = "admin",
   PHARMACIST = "pharmacist",
 }
 
-enum subscriptionStatus {
+export enum subscriptionStatus {
   MONTHLY = "monthly",
   YEARLY = "yearly",
 }
@@ -76,25 +76,25 @@ export class User {
   subscriptionStatus: boolean;
 
   @Column({ type: "enum", enum: subscriptionStatus, nullable: true })
-  subscriptionType: subscriptionStatus;
+  subscriptionType: subscriptionStatus | null;
 
-  @Column({ nullable: true })
-  otpCode: string;
+  @Column({ type: "char", nullable: true })
+  otpCode: string | null;
 
   @Column({ type: "timestamp", nullable: true })
-  otpExpiresAt: Date;
+  otpExpiresAt: Date | null;
 
-  @OneToMany("Medicine", "postedBy")
-  medicines: any;
+  @OneToMany(() => Medicine, (medicine) => medicine.postedBy)
+  medicines: Medicine[];
 
-  @OneToMany("Message", "sender")
-  messages: any;
+  @OneToMany(() => Message, (message) => message.sender)
+  messages: Message[];
 
-  @OneToMany("OTP", "user")
-  otps: any;
+  @OneToMany(() => OTP, (otp) => otp.user)
+  otps: OTP[];
 
-  @OneToOne("Subscription", "user")
-  subscription: any;
+  @OneToOne(() => Subscription, (subscription) => subscription.user)
+  subscription: Subscription;
 
   @CreateDateColumn()
   createdAt: Date;
