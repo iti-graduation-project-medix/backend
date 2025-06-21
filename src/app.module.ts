@@ -10,19 +10,16 @@ import { CustomJwtService } from './common/services/custom-jwt.service';
 import { AuthModule } from './auth/auth.module';
 import { CommonModule } from './common/common.module';
 
+
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.DB_HOST,
-      port: parseInt(process.env.DB_PORT!),
-      username: process.env.DB_USERNAME,
-      password: String(process.env.DB_PASSWORD),
-      database: process.env.DB_NAME,
+      url: "postgresql://postgres.gahtrqxtwtsqvruzinwy:dawaback123@aws-0-eu-north-1.pooler.supabase.com:6543/postgres",
       autoLoadEntities: true,
       entities: [__dirname + '/entities/*.entity{.ts,.js}'],
-
       synchronize: true,
       logging: true,
     }),
@@ -35,4 +32,4 @@ import { CommonModule } from './common/common.module';
   providers: [AppService],
   exports: [],
 })
-export class AppModule {}
+export class AppModule { }
