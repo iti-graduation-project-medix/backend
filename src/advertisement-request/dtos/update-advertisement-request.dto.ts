@@ -1,17 +1,19 @@
 import {
   IsEmail,
+  IsEnum,
   IsNotEmpty,
   IsOptional,
   IsPhoneNumber,
   IsString,
-} from 'class-validator';
+} from "class-validator";
+import { adsRequestStatus } from "src/entities/advertisement-request.entity";
 
 export class UpdateAdvertisementRequestDto {
   @IsString()
   @IsOptional()
   fullName: string;
 
-  @IsPhoneNumber('EG', { message: 'Please enter a valid phone number' })
+  @IsPhoneNumber("EG", { message: "Please enter a valid phone number" })
   @IsOptional()
   phone: string;
 
@@ -22,4 +24,8 @@ export class UpdateAdvertisementRequestDto {
   @IsOptional()
   @IsString()
   content: string;
+
+  @IsOptional()
+  @IsEnum(adsRequestStatus)
+  status: adsRequestStatus;
 }

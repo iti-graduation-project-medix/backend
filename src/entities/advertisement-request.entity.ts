@@ -1,8 +1,15 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm";
+
+export enum adsRequestStatus {
+  INPROGRESS = "in_progress",
+  WAITING = "waiting",
+  ACCEPTED = "accepted",
+  REJECTED = "rejected",
+}
 
 @Entity()
 export class AdvertisementRequest {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
@@ -14,9 +21,16 @@ export class AdvertisementRequest {
   @Column()
   email: string;
 
-  @Column({ type: 'text' })
+  @Column({ type: "text" })
   content: string;
 
-  @OneToOne('Advertisement', 'advertisementRequest')
+  @Column({
+    type: "enum",
+    enum: adsRequestStatus,
+    default: adsRequestStatus.WAITING,
+  })
+  status: adsRequestStatus;
+
+  @OneToOne("Advertisement", "advertisementRequest")
   advertisement: any;
 }
